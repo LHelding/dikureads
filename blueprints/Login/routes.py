@@ -1,9 +1,9 @@
 from flask import render_template, url_for, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user
-from dikureadsv3.models import load_user, User
+from dikureads.models import load_user, User
 
-from dikureadsv3.forms import UserLoginForm, UserSignupForm
-from dikureadsv3.queries import get_user_by_user_name, insert_user
+from dikureads.forms import UserLoginForm, UserSignupForm
+from dikureads.queries import get_user_by_user_name, insert_user
 
 Login = Blueprint('Login', __name__)
 

@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField, FloatField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 
-from dikureadsv3.queries import get_user_by_user_name
+from dikureads.queries import get_user_by_user_name
 
 class UserLoginForm(FlaskForm):
     user_name = StringField('Username',

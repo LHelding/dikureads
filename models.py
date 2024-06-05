@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from dikureadsv3 import login_manager, app, db_cursor
+from dikureads import login_manager, app, db_cursor
 from psycopg2 import sql
 from typing import Dict
 

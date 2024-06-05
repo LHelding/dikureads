@@ -24,6 +24,6 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-from dikureadsv3.blueprints.Login.routes import Login
+from dikureads.blueprints.Login.routes import Login
 
 app.register_blueprint(Login)

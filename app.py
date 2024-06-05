@@ -1,4 +1,4 @@
-from dikureadsv3 import app
+from dikureads import app
 
 #app = Flask(__name__)
 

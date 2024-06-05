@@ -1,5 +1,5 @@
-from dikureadsv3 import db_cursor, conn
-from dikureadsv3.models import User
+from dikureads import db_cursor, conn
+from dikureads.models import User
 
 def get_user_by_user_name(user_name):
     sql = """
