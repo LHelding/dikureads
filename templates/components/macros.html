@@ -1,0 +1,6 @@
+{% macro form_errors (errors=[]) %}
+    {% for error in errors %}
+        <span class="text--red">{{ error }}</span>
+    {% endfor %}
+{% endmacro %}
+

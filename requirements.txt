@@ -2,3 +2,5 @@ Flask
 psycopg2
 pandas
 python-dotenv
+flask-login
+flask-wtf

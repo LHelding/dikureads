@@ -83,6 +83,9 @@ if __name__ == '__main__':
 
         with open('utils/books.sql') as db_file:
             cur.execute(db_file.read())
+            
+        with open('utils/users.sql') as db_file:
+            cur.execute(db_file.read())
         
         genre_dict = insert_genre('dataset/GoodReads_100k_books.csv')
         authors_dict = insert_authors('dataset/GoodReads_100k_books.csv')

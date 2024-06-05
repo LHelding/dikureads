@@ -1,8 +1,10 @@
-from flask import Flask
+from dikureadsv3 import app
 
-app = Flask(__name__)
+#app = Flask(__name__)
 
+if __name__ == '__main__':
+    app.run(debug=True)
 
-@app.route('/')
-def hello():
-    return '<h1>Hello, World!</h1>'
+""" @app.route('/')
+ def hello():
+     return '<h1>Hello, World!</h1>' """
