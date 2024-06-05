@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/login.css') }}">
+{% endblock %}
+{% block content %}
+<section class="form-wrapper">
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group" hidden>
+        {{ form.shelf_name.label }}
+        {{ form.shelf_name }}
+    </div>
+
+    <div class="form-group">
+        {{ form.submit(class="btn btn--full") }}
+    </div>
+</form>
+</section>
+{% endblock %}

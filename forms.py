@@ -45,3 +45,9 @@ class UserSignupForm(FlaskForm):
     def validate_password_repeat(self, field):
         if not self.password.data == self.password_repeat.data:
             raise ValidationError(f'Provided passwords do not match.')
+
+class BookshelfForm(FlaskForm):
+    shelf_name = StringField('Shelf name',
+                             validators=[DataRequired(), Length(min=2, max=50)],
+                             render_kw=dict(placeholder='Shelf name'))
+    submit = SubmitField('Create shelf')

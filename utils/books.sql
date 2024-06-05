@@ -5,6 +5,8 @@ DROP TABLE IF EXISTS written_by CASCADE;
 DROP TABLE IF EXISTS Users CASCADE;
 DROP TABLE IF EXISTS Reviews CASCADE;
 DROP TABLE IF EXISTS Book_Genre CASCADE;
+DROP TABLE IF EXISTS Bookshelf CASCADE;
+DROP TABLE IF EXISTS Books_in_shelf CASCADE;
 
 CREATE TABLE IF NOT EXISTS Authors(
     author_id serial unique not null PRIMARY KEY,
@@ -52,4 +54,16 @@ CREATE TABLE IF NOT EXISTS Reviews(
     book text not null REFERENCES Books(ISBN),
     review_text text,
     rating int
-)
+);
+
+CREATE TABLE IF NOT EXISTS Bookshelf(
+    shelf_id serial unique not null PRIMARY KEY,
+    shelf_owner int not null REFERENCES Users(user_id),
+    shelf_name text
+);
+
+CREATE TABLE IF NOT EXISTS Books_in_shelf(
+    shelf_id int not null REFERENCES Bookshelf(shelf_id),
+    book text not null REFERENCES Books(ISBN),
+    PRIMARY KEY(shelf_id, book)
+);

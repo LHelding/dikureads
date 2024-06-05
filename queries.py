@@ -47,3 +47,21 @@ def get_top_rated_books():
     db_cursor.execute(sql)
     books = db_cursor.fetchall()
     return books
+
+def get_book_shelfs(user_id):
+    sql = """
+    SELECT * FROM Bookshelf
+    WHERE shelf_owner = %s
+    """
+    db_cursor.execute(sql, (user_id,))
+    shelfs = db_cursor.fetchall()
+    return shelfs
+    
+def create_shelf(user_id, shelf_name):
+    sql = """
+    INSERT INTO Bookshelf(shelf_owner, shelf_name)
+    VALUES (%s, %s)
+    """
+    db_cursor.execute(sql, (user_id, shelf_name))
+    conn.commit()
+    return True
