@@ -1,6 +1,19 @@
-{% if current_user.is_authenticated %}
-  <h1>Hi, {{ current_user.user_name }}</h1>
-  <a href="{{ url_for('Login.logout') }}">logout</a>
-{% else %}
-  <h1>why aren't you logged in?</h1>
-{% endif %}
+{% extends 'base.html' %}
+{% block content %}
+<h1>Top 10 books right now:</h1>
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Rating</th>
+    </tr>
+    {% for book in top_rated_books %}
+    <tr>
+        <td><img src="{{book.img}}" width="250px" height="250px"></img></td>
+        <td><a href="{{ url_for('Read.read', book_id=book.isbn)}}">{{book.title}}</a></td>
+        <td>{{book.avg_rating}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -31,3 +31,27 @@ class User(ModelUserMixin):
         self.full_name = user_data.get('full_name')
         self.user_name = user_data.get('user_name')
         self.password = user_data.get('password')
+
+class Book(ModelMixin):
+    def __init__(self, book_data: Dict):
+        super(Book, self).__init__(book_data)
+        self.isbn = book_data.get('isbn')
+        self.title = book_data.get('title')
+        self.pages = book_data.get('pages')
+        self.avg_rating = book_data.get('avg_rating')
+        self.image = book_data.get('image')
+        self.format = book_data.get('formart')
+        self.descr = book_data.get('descr')
+
+class Author(ModelMixin):
+    def __init__(self, author_data: Dict):
+        super(Author, self).__init__(author_data)
+        self.author_id = author_data.get('author_id')
+        self.author_name = author_data.get('author_name')
+
+class Written_by(ModelMixin):
+    def __init__(self, written_by_data: Dict):
+        super(Written_by, self).__init__(written_by_data)
+        self.book = written_by_data.get('book')
+        self.author = written_by_data.get('author')
+

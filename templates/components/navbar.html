@@ -1,12 +1,9 @@
 <nav>
     <div>
         <div class="links-wrapper">
-            <a href="{{ url_for("Login.home") }}">Home</a>
-            <a href="{{ url_for("Produce.produce") }}">All Produce</a>
+            <a href="{{ url_for("Read.home") }}">Home</a>
             {% if current_user.is_authenticated %}
-            <a href="{{ url_for("Produce.add_produce") }}">Add Produce</a>
-            <a href="{{ url_for("Produce.your_produce") }}">Your Produce</a>
-            <a href="{{ url_for("Produce.your_orders") }}">Your Orders</a>
+            <p>{{ current_user.user_name}}</p>
             {% endif %}
         </div>
 

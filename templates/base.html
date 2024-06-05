@@ -14,6 +14,9 @@
 </head>
 <body>
 
+<header>
+    {% include 'components/navbar.html' %}
+</header>
 <main>
     {% block content %}
         {# TODO: dont show this unless user.is_superuser #}
@@ -27,4 +30,6 @@
 {% block js %}
 {% endblock %}
 </body>
+<footer>
+    {% include 'components/footer.html' %}
 </html>

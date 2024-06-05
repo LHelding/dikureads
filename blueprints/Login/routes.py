@@ -8,12 +8,6 @@ from dikureads.queries import get_user_by_user_name, insert_user
 Login = Blueprint('Login', __name__)
 
 
-@Login.route("/")
-@Login.route("/home")
-def home():
-    return render_template('pages/home.html')
-
-
 @Login.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

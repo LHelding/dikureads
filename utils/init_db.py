@@ -51,16 +51,16 @@ def insert_books(dataset, authors_dict, genre_dict):
     df = pd.read_csv('dataset/GoodReads_100k_books.csv')
     df.dropna(subset=['isbn'], inplace=True)
     books = list(
-    map(lambda x: tuple([str(x.isbn), x.title, int(x.pages), float(x.rating), x.bookformat, x.desc, x.author, x.genre]),
-        df[['isbn', 'title', 'pages', 'rating', 'bookformat', 'desc', 'author', 'genre']].to_records(index=False))
+    map(lambda x: tuple([str(x.isbn), x.title, int(x.pages), float(x.rating), x.bookformat, x.desc, x.img, x.author, x.genre]),
+        df[['isbn', 'title', 'pages', 'rating', 'bookformat', 'desc', 'img', 'author', 'genre']].to_records(index=False))
     )
 
-    args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s)", i[:-2]).decode('utf-8') for i in books)
-    cur.execute("INSERT INTO Books (isbn, title, pages, avg_rating, format, descr) VALUES " + args_str)
+    args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s, %s)", i[:-2]).decode('utf-8') for i in books)
+    cur.execute("INSERT INTO Books (isbn, title, pages, avg_rating, format, descr, img) VALUES " + args_str)
 
     for book in books:
-        authors = list(set(book[6].strip().strip('"').split(",")))
-        genre = list(set(str(book[7]).strip().strip('"').split(",")))
+        authors = list(set(book[7].strip().strip('"').split(",")))
+        genre = list(set(str(book[8]).strip().strip('"').split(",")))
         for author in authors:
             author_id = authors_dict.get(author)
             if author_id:

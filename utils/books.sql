@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS Books(
     pages integer,
     avg_rating float,
     format varchar(100),
-    descr text
+    descr text,
+    img text
 );
 
 CREATE TABLE IF NOT EXISTS written_by(
