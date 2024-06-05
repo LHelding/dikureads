@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Genre(
 );
 
 CREATE TABLE IF NOT EXISTS Books(
-    ISBN serial unique not null PRIMARY KEY,
+    ISBN text unique not null PRIMARY KEY,
     -- author int not null REFERENCES Authors(author_id),
     -- genre int not null REFERENCES Genre(genre_id),
     title text,
@@ -34,14 +34,14 @@ CREATE TABLE IF NOT EXISTS Books(
 
 CREATE TABLE IF NOT EXISTS written_by(
     author int not null REFERENCES Authors(author_id),
-    book int not null REFERENCES Books(ISBN),
+    book text not null REFERENCES Books(ISBN),
     PRIMARY KEY(author, book)
 );
 
 CREATE TABLE IF NOT EXISTS Reviews(
     review_id serial unique not null PRIMARY KEY,
     user_id int not null REFERENCES Users(user_id),
-    book int not null REFERENCES Books(ISBN),
+    book text not null REFERENCES Books(ISBN),
     review_text text,
     rating int
 )

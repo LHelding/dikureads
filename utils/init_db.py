@@ -2,6 +2,7 @@ import psycopg2
 import os
 from dotenv import load_dotenv
 import pandas as pd
+import ctypes
 
 load_dotenv()
 
@@ -38,12 +39,14 @@ def insert_genre(dataset):
 
 def insert_books(dataset):
     df = pd.read_csv('dataset/GoodReads_100k_books.csv')
+    df.dropna(subset=['isbn'], inplace=True)
     books = list(
-    map(lambda x: tuple(x),
+    map(lambda x: tuple([str(x.isbn), x.title, int(x.pages), float(x.rating), x.bookformat, x.desc]),
         df[['isbn', 'title', 'pages', 'rating', 'bookformat', 'desc']].to_records(index=False))
     )
-    args_str = ','.join(cur.mogrify("(%i, %s, %s, %s, %s, %s)", i).decode('utf-8') for i in books)
-    cur.execute("INSERT INTO Produce (isbn, title, pages, avg_rating, format, descr) VALUES " + args_str)
+
+    args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s)", i).decode('utf-8') for i in books)
+    cur.execute("INSERT INTO Books (isbn, title, pages, avg_rating, format, descr) VALUES " + args_str)
 
 
 if __name__ == '__main__':
@@ -58,8 +61,8 @@ if __name__ == '__main__':
         with open('utils/books.sql') as db_file:
             cur.execute(db_file.read())
         
-        insert_genre('dataset/GoodReads_100k_books.csv')
-        insert_authors('dataset/GoodReads_100k_books.csv')
+        #insert_genre('dataset/GoodReads_100k_books.csv')
+        #insert_authors('dataset/GoodReads_100k_books.csv')
         insert_books('dataset/GoodReads_100k_books.csv')
 
 
