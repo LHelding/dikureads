@@ -1,0 +1,39 @@
+.book-details {
+    display: flex;
+}
+
+.book-info {
+    flex: 1;
+    text-align: center;
+}
+
+.book-reviews {
+    flex: 1;
+    margin-left: 20px; /* Adjust margin as needed */
+}
+
+.review {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.review h3 {
+    margin-top: 0;
+}
+
+.review p {
+    margin-bottom: 5px;
+}
+
+/* Style for the "Post a review" link */
+.book-reviews a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #ffffff; /* Change to your preferred link color */
+}
+
+.book-reviews a:hover {
+    text-decoration: underline;
+}

@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
-
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/viewBook.css') }}">
+{% endblock %}
 {% block content %}
 <div class="book-details">
     <div class="book-info">
         <h1>{{ book.title }}</h1>
-        <h1>ISBN: {{ book_id }}</h1>
         <img src="{{ book.img }}" alt="book image">
         <p>Author/s: </p>
         {% for author in authors %}
             <p>{{ author.author_name }}</p>
         {% endfor %}
         <p>{{ book.pages }} pages</p>
+        <p>ISBN: {{ book_id }}</p>
     </div>
     <div class="book-reviews">
-        <a href = "{{url_for('Read.review', book_id = book_id)}}">Post a review</a>
+        <a href = "{{url_for('Read.review', book_id = book_id)}}" type="button" class="btn btn-danger"> Post a review</a>
         <h2>Reviews</h2>
         {% for review in reviews %}
             <div class="review">

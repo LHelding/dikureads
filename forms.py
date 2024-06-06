@@ -51,7 +51,7 @@ class ReviewForm(FlaskForm):
                             validators=[DataRequired(), NumberRange(min=1, max=5)],
                             render_kw=dict(placeholder='select number between 1 and 5'))
     review_text = StringField('Review text',
-                            validators=[DataRequired(), Length(min=2, max=50)],
+                            validators=[DataRequired(), Length(min=2, max=1500)],
                             render_kw=dict(placeholder='Review text'))
     submit = SubmitField('Post review')
 
