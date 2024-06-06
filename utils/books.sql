@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS Reviews(
     rating int
 );
 
+INSERT INTO Reviews(user_id, book, review_text, rating) VALUES (1, '906212022', 'i love shapes', 5);
+
 CREATE TABLE IF NOT EXISTS Bookshelf(
     shelf_id serial unique not null PRIMARY KEY,
     shelf_owner int not null REFERENCES Users(user_id),

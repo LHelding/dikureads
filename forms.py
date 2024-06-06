@@ -46,6 +46,15 @@ class UserSignupForm(FlaskForm):
         if not self.password.data == self.password_repeat.data:
             raise ValidationError(f'Provided passwords do not match.')
 
+class ReviewForm(FlaskForm):
+    rating = IntegerField ('Rating',
+                            validators=[DataRequired(), NumberRange(min=1, max=5)],
+                            render_kw=dict(placeholder='select number between 1 and 5'))
+    review_text = StringField('Review text',
+                            validators=[DataRequired(), Length(min=2, max=50)],
+                            render_kw=dict(placeholder='Review text'))
+    submit = SubmitField('Post review')
+
 class BookshelfForm(FlaskForm):
     shelf_name = StringField('Shelf name',
                              validators=[DataRequired(), Length(min=2, max=50)],
