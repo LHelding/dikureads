@@ -19,6 +19,27 @@ def get_book(isbn):
     book = db_cursor.fetchone()
     return book
 
+def search_books(search_term):
+    sql = """
+    SELECT * FROM books
+    WHERE title LIKE %s
+    ORDER BY title ASC
+    LIMIT 2000
+    """
+    db_cursor.execute(sql, ('%' + search_term + '%',))
+    books = db_cursor.fetchall()
+    return books
+
+def get_books():
+    sql = """
+    SELECT * FROM books
+    ORDER BY title ASC
+    LIMIT 2000
+    """
+    db_cursor.execute(sql)
+    books = db_cursor.fetchall()
+    return books
+
 def insert_user(user: User):
     sql = """
     INSERT INTO Users(user_name, full_name, password)

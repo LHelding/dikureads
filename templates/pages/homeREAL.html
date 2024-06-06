@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/bookss.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="search-container">
+        <input type="text" id="search-bar" name="query" placeholder="Search books...">
+        <button type="submit" id="search-button">Search</button>
+
+</div>
+<div class="book-container">
+    {% for book in allBooks %}
+    <div class="book">
+        <img src="{{book.img}}" width="200px" height="250px"></img>
+            <a href="{{ url_for('BookView.read', book_id=book.isbn)}}">{{book.title}}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
