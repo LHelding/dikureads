@@ -1,7 +1,7 @@
 from flask import render_template, url_for, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from dikureads.models import load_user, User, Book, Author
-from dikureads.queries import get_book, get_authors_from_isbn, get_books, search_books, get_book_shelfs, create_shelf, get_top_rated_books
+from dikureads.queries import get_book, get_authors_from_isbn, get_books, search_books, get_book_shelfs, create_shelf_in_db, get_top_rated_books
 from dikureads.forms import BookshelfForm
 
 
