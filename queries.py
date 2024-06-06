@@ -135,7 +135,7 @@ def get_books_in_shelf(shelf_id):
     books = db_cursor.fetchall()
     return books
 
-def remove_book_from_shelf(shelf_id, book_id):
+def remove_book_from_shelf_db(shelf_id, book_id):
     sql = """
     DELETE FROM Books_in_shelf
     WHERE shelf_id = %s AND book = %s
