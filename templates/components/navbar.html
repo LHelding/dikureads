@@ -3,7 +3,7 @@
         <div class="links-wrapper">
             <a href="{{ url_for("Read.home") }}">Home</a>
             {% if current_user.is_authenticated %}
-            <p>{{ current_user.user_name}}</p>
+            <a href="{{ url_for("Read.shelf")}}">Bogreoler</a>
             {% endif %}
         </div>
 

@@ -56,12 +56,49 @@ def get_book_shelfs(user_id):
     db_cursor.execute(sql, (user_id,))
     shelfs = db_cursor.fetchall()
     return shelfs
-    
-def create_shelf(user_id, shelf_name):
+
+def get_book_shelf(shelf_id):
+    sql = """
+    SELECT * FROM Bookshelf
+    WHERE shelf_id = %s
+    """
+    db_cursor.execute(sql, (shelf_id,))
+    shelf = db_cursor.fetchone()
+    return shelf
+
+def delete_shelf(shelf_id):
+    sql = """
+    DELETE FROM Bookshelf
+    WHERE shelf_id = %s
+    """
+    db_cursor.execute(sql, (shelf_id,))
+    conn.commit()
+    return True
+
+def create_shelf_in_db(user_id, shelf_name):
     sql = """
     INSERT INTO Bookshelf(shelf_owner, shelf_name)
     VALUES (%s, %s)
     """
     db_cursor.execute(sql, (user_id, shelf_name))
+    conn.commit()
+    return True
+
+def get_books_in_shelf(shelf_id):
+    sql = """
+    SELECT * FROM Books
+    JOIN Books_in_shelf ON Books.isbn = Books_in_shelf.book
+    WHERE Books_in_shelf.shelf_id = %s
+    """
+    db_cursor.execute(sql, (shelf_id,))
+    books = db_cursor.fetchall()
+    return books
+
+def remove_book_from_shelf(shelf_id, book_id):
+    sql = """
+    DELETE FROM Books_in_shelf
+    WHERE shelf_id = %s AND book = %s
+    """
+    db_cursor.execute(sql, (shelf_id, book_id))
     conn.commit()
     return True
