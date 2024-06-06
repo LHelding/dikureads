@@ -8,7 +8,7 @@ from dikureads.forms import BookshelfForm, ReviewForm
 Read = Blueprint('Read', __name__)
 
 
-@Read.route("/")
+@Read.route("/test")
 def home():
     top_rated_books = get_top_rated_books()
     top_rated_books = [Book(book) for book in top_rated_books]
