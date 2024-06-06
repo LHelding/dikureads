@@ -19,6 +19,27 @@ def get_book(isbn):
     book = db_cursor.fetchone()
     return book
 
+def search_books(search_term):
+    sql = """
+    SELECT * FROM books
+    WHERE title LIKE %s
+    ORDER BY title ASC
+    LIMIT 2000
+    """
+    db_cursor.execute(sql, ('%' + search_term + '%',))
+    books = db_cursor.fetchall()
+    return books
+
+def get_books():
+    sql = """
+    SELECT * FROM books
+    ORDER BY title ASC
+    LIMIT 2000
+    """
+    db_cursor.execute(sql)
+    books = db_cursor.fetchall()
+    return books
+
 def insert_user(user: User):
     sql = """
     INSERT INTO Users(user_name, full_name, password)
@@ -37,6 +58,26 @@ def get_authors_from_isbn(isbn):
     db_cursor.execute(sql, (isbn,))
     authors = db_cursor.fetchall()
     return authors
+
+def get_reviews_from_isbn(isbn):
+    sql = """
+    SELECT *
+    FROM Reviews
+    JOIN Users ON Reviews.user_id = Users.pk
+    WHERE Reviews.book = %s
+    """
+    db_cursor.execute(sql, (isbn,))
+    reviews = db_cursor.fetchall()
+    return reviews
+
+def add_review(review):
+    sql = """
+    INSERT INTO Reviews (user_id, book, review_text, rating)
+    VALUES (%s, %s, %s, %s)
+    """
+    print(review)
+    db_cursor.execute(sql, (review['user_id'], review['book'], review['review_text'], review['rating']))
+    conn.commit()
 
 def get_top_rated_books():
     sql = """

@@ -1,11 +1,34 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-<h1>{{book.title}}</h1>
-<h1>{{book_id}}</h1>
-<img src="{{book.img}}" alt="book image">
-{% for author in authors %}
-    <p>{{author.author_name}}</p>
-{% endfor %}
+<div class="book-details">
+    <div class="book-info">
+        <h1>{{ book.title }}</h1>
+        <h1>ISBN: {{ book_id }}</h1>
+        <img src="{{ book.img }}" alt="book image">
+        <p>Author/s: </p>
+        {% for author in authors %}
+            <p>{{ author.author_name }}</p>
+        {% endfor %}
+        <p>{{ book.pages }} pages</p>
+    </div>
+    <div class="book-reviews">
+        <a href = "{{url_for('Read.review', book_id = book_id)}}">Post a review</a>
+        <h2>Reviews</h2>
+        {% for review in reviews %}
+            <div class="review">
+                <h3>{{ review.user_name }}</h3>
+                <p>Rating: 
+                    {% for _ in range(review.rating) %}
+                        ★
+                    {% endfor %}
+                    {% for _ in range(5 - review.rating) %}
+                        ☆
+                    {% endfor %}
+                </p>
+                <p>{{ review.review_text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
