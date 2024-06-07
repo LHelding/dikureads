@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import pandas as pd
 import ctypes
+import numpy as np
 
 load_dotenv()
 
@@ -50,14 +51,16 @@ def insert_genre(dataset):
 def insert_books(dataset, authors_dict, genre_dict):
     df = pd.read_csv('dataset/GoodReads_100k_books.csv')
     df.dropna(subset=['isbn'], inplace=True)
+    cover_not_found = 'https://i.ibb.co/YT1z13K/book-image-not-found.png'
+    df['img'] = df['img'].fillna(cover_not_found)
+
     books = list(
     map(lambda x: tuple([str(x.isbn), x.title, int(x.pages), float(x.rating), x.bookformat, x.desc, x.img, x.author, x.genre]),
         df[['isbn', 'title', 'pages', 'rating', 'bookformat', 'desc', 'img', 'author', 'genre']].to_records(index=False))
     )
-
     args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s, %s)", i[:-2]).decode('utf-8') for i in books)
     cur.execute("INSERT INTO Books (isbn, title, pages, avg_rating, format, descr, img) VALUES " + args_str)
-
+    print('still loading books...')
     for book in books:
         authors = list(set(book[7].strip().strip('"').split(",")))
         genre = list(set(str(book[8]).strip().strip('"').split(",")))

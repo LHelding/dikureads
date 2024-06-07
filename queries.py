@@ -75,7 +75,6 @@ def add_review(review):
     INSERT INTO Reviews (user_id, book, review_text, rating)
     VALUES (%s, %s, %s, %s)
     """
-    print(review)
     db_cursor.execute(sql, (review['user_id'], review['book'], review['review_text'], review['rating']))
     conn.commit()
 
