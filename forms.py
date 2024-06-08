@@ -3,7 +3,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField, FloatField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 
-from dikureads.queries import get_user_by_user_name
+from dikureads.queries import get_user_by_user_name, get_book_shelfs
+from dikureads.models import Book_shelf
+from dikureads.utils.choices import ModelChoices
 
 class UserLoginForm(FlaskForm):
     user_name = StringField('Username',
@@ -60,3 +62,16 @@ class BookshelfForm(FlaskForm):
                              validators=[DataRequired(), Length(min=2, max=50)],
                              render_kw=dict(placeholder='Shelf name'))
     submit = SubmitField('Create shelf')
+
+class BookshelfForm(FlaskForm):
+    user_id = current_user.id if current_user else None
+    bookshelfs = get_book_shelfs(user_id)
+    bookshelfs = [Book_shelf(bookshelf) for bookshelf in bookshelfs]
+    print("test")
+    print(bookshelfs)
+    choices = ModelChoices(bookshelfs)
+
+    category = SelectField('Bogreol',
+                           choices=choices.choices())
+
+    submit = SubmitField('submit')
