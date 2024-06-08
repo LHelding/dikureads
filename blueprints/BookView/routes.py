@@ -22,8 +22,9 @@ def read(book_id):
     authors = [Author(author) for author in authors]
     return render_template('pages/book_view.html', book_id=book_id, book=book, authors=authors)
 
-@BookView.route("/search/<search_term>")
-def search(search_term):
+@BookView.route("/search", methods=['GET'])
+def search():
+    search_term = request.args.get('query', '')
     books = search_books(search_term)
     books = [Book(book) for book in books]
     return render_template('pages/homeREAL.html', allBooks=books)

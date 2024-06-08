@@ -142,3 +142,12 @@ def remove_book_from_shelf_db(shelf_id, book_id):
     db_cursor.execute(sql, (shelf_id, book_id))
     conn.commit()
     return True
+
+def add_book_to_shelf_db(shelf_id, book_id):
+    sql = """
+    INSERT INTO Books_in_shelf(shelf_id, book)
+    VALUES (%s, %s)
+    """
+    db_cursor.execute(sql, (shelf_id, book_id))
+    conn.commit()
+    return True

@@ -9,7 +9,7 @@
 
 .book-reviews {
     flex: 1;
-    margin-left: 20px; /* Adjust margin as needed */
+    margin-left: 20px; 
 }
 
 .review {
@@ -28,10 +28,12 @@
 
 /* Style for the "Post a review" link */
 .book-reviews a {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
     text-decoration: none;
-    color: #ffffff; /* Change to your preferred link color */
+    color: #ffffff;
 }
 
 .book-reviews a:hover {
