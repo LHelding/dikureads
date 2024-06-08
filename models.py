@@ -58,6 +58,6 @@ class Written_by(ModelMixin):
 class Book_shelf(ModelMixin):
     def __init__(self, book_shelf_data: Dict):
         super(Book_shelf, self).__init__(book_shelf_data)
-        self.self_id = book_shelf_data.get('shelf_id')
+        self.shelf_id = book_shelf_data.get('shelf_id')
         self.shelf_owner = book_shelf_data.get('shelf_owner')
         self.shelf_name = book_shelf_data.get('shelf_name')

@@ -5,6 +5,8 @@ from dikureads.models import load_user, User
 from dikureads.forms import UserLoginForm, UserSignupForm
 from dikureads.queries import get_user_by_user_name, insert_user
 
+import re
+
 Login = Blueprint('Login', __name__)
 
 
@@ -30,12 +32,13 @@ def signup():
     form = UserSignupForm()
     if request.method == 'POST':
         if form.validate_on_submit():
+            user_name = re.search(r'[a-z]{3}[0-9]{3}(?=@alumni.ku.dk)', form.user_name.data).group()
             user_data = dict(full_name=form.full_name.data,
-                             user_name=form.user_name.data,
+                             user_name=user_name,
                              password=form.password.data)
             user = User(user_data)
             insert_user(user)
-            user = get_user_by_user_name(form.user_name.data)
+            user = get_user_by_user_name(user_name)
             if user:
                 login_user(user, remember=True)
                 next_page = request.args.get('next')

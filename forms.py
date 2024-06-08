@@ -5,7 +5,8 @@ from wtforms.validators import DataRequired, Length, ValidationError, NumberRang
 
 from dikureads.queries import get_user_by_user_name, get_book_shelfs
 from dikureads.models import Book_shelf
-from dikureads.utils.choices import ModelChoices
+from dikureads.utils.choices import ModelChoices2, UserTypeChoices
+import re
 
 class UserLoginForm(FlaskForm):
     user_name = StringField('Username',
@@ -27,7 +28,7 @@ class UserSignupForm(FlaskForm):
     full_name = StringField('Full name',
                             validators=[DataRequired(), Length(min=2, max=50)],
                             render_kw=dict(placeholder='Full name'))
-    user_name = StringField('Username',
+    user_name = StringField('Email',
                             validators=[DataRequired(), Length(min=2, max=50)],
                             render_kw=dict(placeholder='Username'))
     password = PasswordField('Password',
@@ -43,6 +44,10 @@ class UserSignupForm(FlaskForm):
         user = get_user_by_user_name(self.user_name.data)
         if user:
             raise ValidationError(f'User name "{self.user_name.data}" already in use.')
+
+        val = re.search(r'[a-z]{3}[0-9]{3}(?=@alumni.ku.dk)', self.user_name.data)
+        if not val:
+            raise ValidationError(f'Venligst brug dit KU email som brugernavn')
 
     def validate_password_repeat(self, field):
         if not self.password.data == self.password_repeat.data:
@@ -63,15 +68,8 @@ class BookshelfForm(FlaskForm):
                              render_kw=dict(placeholder='Shelf name'))
     submit = SubmitField('Create shelf')
 
-class BookshelfForm(FlaskForm):
-    user_id = current_user.id if current_user else None
-    bookshelfs = get_book_shelfs(user_id)
-    bookshelfs = [Book_shelf(bookshelf) for bookshelf in bookshelfs]
-    print("test")
-    print(bookshelfs)
-    choices = ModelChoices(bookshelfs)
-
-    category = SelectField('Bogreol',
-                           choices=choices.choices())
+class BookshelfForm(FlaskForm):    
+    bookshelf = SelectField('Bogreol',
+                           choices=[])
 
     submit = SubmitField('submit')

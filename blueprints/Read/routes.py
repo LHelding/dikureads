@@ -4,19 +4,29 @@ from dikureads.models import load_user, User, Book, Author, Book_shelf
 
 from dikureads.queries import get_book, get_authors_from_isbn,  get_book_shelfs, create_shelf_in_db, get_book_shelf, delete_shelf, get_books_in_shelf, remove_book_from_shelf_db, get_reviews_from_isbn, add_review, add_book_to_shelf_db
 from dikureads.forms import BookshelfForm, ReviewForm
+from dikureads.utils.choices import ModelChoices
 
 
 Read = Blueprint('Read', __name__)
 
-@Read.route("/read/<book_id>")
+@Read.route("/read/<book_id>", methods=['GET', 'POST'])
 def read(book_id):
     book = get_book(book_id)
     book = Book(book)
     authors = get_authors_from_isbn(book_id)
     authors = [Author(author) for author in authors]
     reviews = get_reviews_from_isbn(book_id)
+    shelves = [Book_shelf(shelf) for shelf in get_book_shelfs(current_user.id)]
     
+    choices = ModelChoices(shelves)
     form = BookshelfForm()
+    form.bookshelf.choices = choices.choices()
+    
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            add_book_to_shelf_db(form.bookshelf.data, book_id)
+            return redirect(url_for('Read.read', book_id=book_id))
     return render_template('pages/book_view.html', book_id=book_id, book=book, authors=authors, reviews = reviews, form=form)
 
 @Read.route("/read/<book_id>/review", methods=['GET', 'POST'])
