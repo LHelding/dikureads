@@ -16,6 +16,21 @@
     </div>
     <div class="book-reviews">
         <a href = "{{url_for('Read.review', book_id = book_id)}}" type="button" class="btn btn-danger"> Post a review</a>
+        <section class="form-wrapper">
+            <h1>Tilføj til bogreol:</h1>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+    
+                <div class="form-group">
+                    {{ form.category.label }}
+                    {{ form.category }}
+                </div>
+    
+                <div class="form-group">
+                    {{ form.submit(class="btn btn--full") }}
+                </div>
+            </form>
+        </section>
         <h2>Reviews</h2>
         {% for review in reviews %}
             <div class="review">
