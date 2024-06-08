@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Dine bogreoler</h1>
-<a href="{{url_for('Read.create_shelf')}}">Opret bogreol</a>
+<h1>Your Bookshelves</h1>
+<a href="{{url_for('Read.create_shelf')}}">Create Bookshelf</a>
 <table>
     <tr>
-        <th>Navn</th>
+        <th>Name</th>
         <th></th>
     </tr>
     {% for shelf in book_shelfs %}

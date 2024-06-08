@@ -1,18 +1,11 @@
 from flask import render_template, url_for, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from dikureads.models import load_user, User, Book, Author, Book_shelf
-from dikureads.queries import get_book, get_authors_from_isbn, get_top_rated_books, get_book_shelfs, create_shelf_in_db, get_book_shelf, delete_shelf, get_books_in_shelf, remove_book_from_shelf_db, get_reviews_from_isbn, add_review
+from dikureads.queries import get_book, get_authors_from_isbn,  get_book_shelfs, create_shelf_in_db, get_book_shelf, delete_shelf, get_books_in_shelf, remove_book_from_shelf_db, get_reviews_from_isbn, add_review, add_book_to_shelf_db
 from dikureads.forms import BookshelfForm, ReviewForm
 
 
 Read = Blueprint('Read', __name__)
-
-
-@Read.route("/test")
-def home():
-    top_rated_books = get_top_rated_books()
-    top_rated_books = [Book(book) for book in top_rated_books]
-    return render_template('pages/home.html', top_rated_books=top_rated_books)
 
 @Read.route("/read/<book_id>")
 def read(book_id):
@@ -83,4 +76,11 @@ def remove_book_from_shelf(shelf_id, book_id):
     #     return redirect(url_for('Read.shelf'))
     remove_book_from_shelf_db(shelf_id, book_id)
     return redirect(url_for('Read.view_shelf', shelf_id=shelf_id))
-    
+
+@Read.route("/shelf/add/<book_id>", methods=['POST'])
+@login_required
+def add_book_to_shelf(book_id):
+    shelf_id = request.form.get('shelf_id')
+    if shelf_id and current_user.is_authenticated:
+        add_book_to_shelf_db(shelf_id, book_id)
+    return redirect(url_for('Read.read', book_id=book_id))

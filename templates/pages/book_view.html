@@ -15,7 +15,9 @@
         <p>ISBN: {{ book_id }}</p>
     </div>
     <div class="book-reviews">
-        <a href = "{{url_for('Read.review', book_id = book_id)}}" type="button" class="btn btn-danger"> Post a review</a>
+        {% if current_user.is_authenticated %}
+            <a href = "{{url_for('Read.review', book_id = book_id)}}" type="button" class="btn btn-danger"> Post a review</a>
+        {% endif %}
         <h2>Reviews</h2>
         {% for review in reviews %}
             <div class="review">
