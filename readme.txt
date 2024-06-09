@@ -25,3 +25,4 @@ The user 'admin' with the password 'admin' will be logged in automatically.
 You can review books and add them to book shelves after creating them.
 You can search for books on the front page using the search bar.
 You can also log 'admin' out and create your own user.
+Note new users should be created with a ku-mail as username
