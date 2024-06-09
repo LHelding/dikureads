@@ -1,12 +1,12 @@
-How to køre projektet
+How to run the project
 
-lav et virutal env på maskinen et sted
-python3 -m venv 'path til env'
+Make a virtual environment of a chosen name
+python3 -m venv 'name of virtual env'
 
-aktiver det
-source 'path til env'/bin/activate
+Activate it
+source 'name of virtual env'/bin/activate
 
-installér requirements
+Install requirements
 python3 install -r requirements.txt
 
 Create a new database in pgAdmin (preferably named dikureads) and add the following to your .env file (normally
@@ -17,5 +17,11 @@ DB_USERNAME=postgres || <postgres_user_name>
 DB_PASSWORD=<postgres_user_password>
 DB_NAME=dikureads || <postgres_db_name>
 
-køre 
+Run the project:
+python3 utils/init_db.py
 flask run
+
+The user 'admin' with the password 'admin' will be logged in automatically.
+You can review books and add them to book shelves after creating them.
+You can search for books on the front page using the search bar.
+You can also log 'admin' out and create your own user.
