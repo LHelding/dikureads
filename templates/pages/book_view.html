@@ -14,14 +14,15 @@
         <p>{{ book.pages }} pages</p>
         <p>ISBN: {{ book_id }}</p>
     </div>
-    {% if current_user.is_authenticated %}
+
+{% if current_user.is_authenticated %}
     <div class="book-reviews">
         <a href = "{{url_for('Read.review', book_id = book_id)}}" type="button" class="btn btn-danger"> Post a review</a>
     {% else %}
         <a href = "{{url_for('Login.login')}}" type="button" class="btn btn-danger"> Post a review</a>
     {% endif %}
     {% if current_user.is_authenticated %}
-        <section class="form-wrapper">
+        <div class="form-wrapper">
             <h1>Add to Bookshelf:</h1>
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
@@ -34,8 +35,7 @@
                     </div>
                 </form>
             {% endif %}
-        </section>
-    
+        </div>
         <h2>Reviews</h2>
         {% for review in reviews %}
             <div class="review">
