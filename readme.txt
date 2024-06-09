@@ -17,6 +17,9 @@ DB_USERNAME=postgres || <postgres_user_name>
 DB_PASSWORD=<postgres_user_password>
 DB_NAME=dikureads || <postgres_db_name>
 
+Or use our .env file by creating a database named 'dikureads',
+with the user 'brugeren' and the password '12talspigerne'
+
 Run the project:
 python3 utils/init_db.py
 flask run
@@ -25,4 +28,4 @@ The user 'admin' with the password 'admin' will be logged in automatically.
 You can review books and add them to book shelves after creating them.
 You can search for books on the front page using the search bar.
 You can also log 'admin' out and create your own user.
-Note new users should be created with a ku-mail as username
+Note new users should be created with a ku-mail as username, i.e xxx###@alumni.ku.dk
