@@ -9,7 +9,7 @@
     </tr>
     {% for book in books %}
     <tr>
-        <td><img src="{{book.img}}" width="250px" height="250px"></img></td>
+        <td><img src="{{book.img}}" width="180px" height="240px"></img></td>
         <td><a href="{{ url_for('Read.read', book_id=book.isbn)}}">{{book.title}}</a></td>
         <td><a href="{{ url_for('Read.remove_book_from_shelf', shelf_id=shelf.shelf_id, book_id=book.isbn)}}" type="button", class="btn btn-danger"> Delete</a> </td>
     </tr>
