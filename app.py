@@ -4,7 +4,3 @@ from dikureads import app
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-""" @app.route('/')
- def hello():
-     return '<h1>Hello, World!</h1>' """

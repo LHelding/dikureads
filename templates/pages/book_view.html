@@ -14,23 +14,28 @@
         <p>{{ book.pages }} pages</p>
         <p>ISBN: {{ book_id }}</p>
     </div>
+    {% if current_user.is_authenticated %}
     <div class="book-reviews">
         <a href = "{{url_for('Read.review', book_id = book_id)}}" type="button" class="btn btn-danger"> Post a review</a>
+    {% else %}
+        <a href = "{{url_for('Login.login')}}" type="button" class="btn btn-danger"> Post a review</a>
+    {% endif %}
+    {% if current_user.is_authenticated %}
         <section class="form-wrapper">
-            <h1>Tilføj til bogreol:</h1>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-    
-                <div class="form-group">
-                    {{ form.bookshelf.label }}
-                    {{ form.bookshelf }}
+            <h1>Add to Bookshelf:</h1>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.bookshelf.label }}
+                        {{ form.bookshelf }}
                     </div>
-    
-                <div class="form-group">
-                    {{ form.submit(class="btn btn--full") }}
-                </div>
-            </form>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn--full") }}
+                    </div>
+                </form>
+            {% endif %}
         </section>
+    
         <h2>Reviews</h2>
         {% for review in reviews %}
             <div class="review">

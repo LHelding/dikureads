@@ -10,32 +10,20 @@
 .book-reviews {
     flex: 1;
     margin-left: 20px; 
+    flex-direction: column;
 }
 
 .review {
-    border: 1px solid #ccc;
+    border: 1px solid #0291ff;
     padding: 10px;
     margin-bottom: 10px;
 }
 
-.review h3 {
-    margin-top: 0;
-}
 
-.review p {
-    margin-bottom: 5px;
-}
-
-/* Style for the "Post a review" link */
 .book-reviews a {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    text-decoration: none;
     color: #ffffff;
-}
-
-.book-reviews a:hover {
-    text-decoration: underline;
 }

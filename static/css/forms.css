@@ -16,7 +16,7 @@ input[type=text], input[type=password], input[type=number], select {
 }
 
 input:focus, select:focus {
-    border: 1px solid var(--green);
+    border: 1px solid var(--blue);
 }
 
 input[type=number], select {

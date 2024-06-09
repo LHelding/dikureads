@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Bøger i reolen: {{ shelf.shelf_name}}</h1>
+<h1>Books in Bookshelf: {{ shelf.shelf_name}}</h1>
 <table>
     <tr>
         <th></th>
@@ -11,7 +11,7 @@
     <tr>
         <td><img src="{{book.img}}" width="250px" height="250px"></img></td>
         <td><a href="{{ url_for('Read.read', book_id=book.isbn)}}">{{book.title}}</a></td>
-        <td><a href="{{ url_for('Read.remove_book_from_shelf', shelf_id=shelf.shelf_id, book_id=book.isbn)}}" type="button">Delete</a> </td>
+        <td><a href="{{ url_for('Read.remove_book_from_shelf', shelf_id=shelf.shelf_id, book_id=book.isbn)}}" type="button", class="btn btn-danger"> Delete</a> </td>
     </tr>
     {% endfor %}
 </table>

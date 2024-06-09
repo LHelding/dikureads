@@ -39,13 +39,13 @@ main {
 }
 
 a, a:visited, a:focus, a:active {
-    color: var(--green);
+    color: var(--blue);
     text-decoration: none;
     transition: color .3s ease-in-out;
 }
 
 .btn, a.btn {
-    background-color: var(--green);
+    background-color: var(--blue);
     color: var(--white);
     display: grid;;
     place-items: center;
@@ -68,19 +68,19 @@ a, a:visited, a:focus, a:active {
 }
 
 .btn--primary {
-    background-color: var(--green);
+    background-color: var(--blue);
 }
 
 .btn--secondary {
     background-color: transparent;
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: var(--blue);
+    border: 1px solid var(--blue);
 }
 
 .btn--tertiary {
     display: block;
     background-color: transparent;
-    color: var(--green);
+    color: var(--blue);
     text-align: left;
     padding: 0;
 }
@@ -116,8 +116,8 @@ img {
     box-shadow: none;
 }
 
-.icon--green {
-    filter: var(--filter-green);
+.icon--blue {
+    filter: var(--filter-blue);
 }
 
 [hidden] {

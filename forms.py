@@ -47,7 +47,7 @@ class UserSignupForm(FlaskForm):
 
         val = re.search(r'[a-z]{3}[0-9]{3}(?=@alumni.ku.dk)', self.user_name.data)
         if not val:
-            raise ValidationError(f'Venligst brug dit KU email som brugernavn')
+            raise ValidationError(f'Please use your KU email address as username.')
 
     def validate_password_repeat(self, field):
         if not self.password.data == self.password_repeat.data:
@@ -68,8 +68,8 @@ class BookshelfForm(FlaskForm):
                              render_kw=dict(placeholder='Shelf name'))
     submit = SubmitField('Create shelf')
 
-class BookshelfForm(FlaskForm):    
-    bookshelf = SelectField('Bogreol',
+class OtherBookshelfForm(FlaskForm):    
+    bookshelf = SelectField('BookShelf',
                            choices=[])
 
-    submit = SubmitField('submit')
+    submit = SubmitField('Add to shelf')

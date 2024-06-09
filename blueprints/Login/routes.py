@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user
-from dikureads.models import load_user, User
+from dikureads.models import User
 
 from dikureads.forms import UserLoginForm, UserSignupForm
 from dikureads.queries import get_user_by_user_name, insert_user

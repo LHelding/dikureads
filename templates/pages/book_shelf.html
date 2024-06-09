@@ -10,7 +10,7 @@
     {% for shelf in book_shelfs %}
     <tr>
         <td><a href="{{url_for('Read.view_shelf', shelf_id=shelf.shelf_id)}}">{{shelf.shelf_name}}</a></td>
-        <td><a href="{{url_for('Read.delete_bookshelf', shelf_id=shelf.shelf_id)}}" type="button" class="btn btn-danger">Delete</a></td>
+        <td><a href="{{url_for('Read.delete_bookshelf', shelf_id=shelf.shelf_id)}}" type="button" class="btn btn-danger"> Delete</a></td>
     </tr>
     {% endfor %}
 </table>

@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/books-homepage.css') }}">
+{% endblock %}
 {% block content %}
-<h1>Top 10 books right now:</h1>
-<table>
-    <tr>
-        <th>Rank</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Rating</th>
-    </tr>
-    {% for book in top_rated_books %}
-    <tr>
-        <td><img src="{{book.img}}" width="100px" height="150px"></img></td>
-        <td><a href="{{ url_for('Read.read', book_id=book.isbn)}}">{{book.title}}</a></td>
-        <td>{{book.avg_rating}}</td>
-    </tr>
+    <div class="search-container">
+    <form method="GET" action="{{ url_for('BookView.search') }}">
+        <input type="text" id="search-bar" name="query" placeholder="Search books...">
+        <button type="submit" id="search-button">Search</button>
+    </form>
+</div>
+<div class="book-container">
+    {% for book in allBooks %}
+    <div class="book">
+        <img src="{{book.img}}" width="200px" height="250px"></img>
+            <a href="{{ url_for('Read.read', book_id=book.isbn)}}">{{book.title}}</a>
+    </div>
     {% endfor %}
-</table>
+</div>
 {% endblock %}
